@@ -47,7 +47,7 @@ php artisan key:generate
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3406
-DB_DATABASE=teste_dev_php
+DB_DATABASE=api_customer
 DB_USERNAME=admin
 DB_PASSWORD=admin
 
