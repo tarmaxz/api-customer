@@ -47,7 +47,7 @@ Este projeto roda **completamente dentro de containers Docker**:
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/seuusuario/seurepositorio.git
+git clone https://github.com/tarmaxz/api-customer.git
 cd seurepositorio
 
 # 2. Copie o arquivo .env
