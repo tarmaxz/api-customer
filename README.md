@@ -4,11 +4,15 @@
 
 **Backend (API em Laravel)** para cadastro de clientes, com funcionalidades de listagem, criação, edição e exclusão, além de validação automática de endereço via **CEP**.
 
-## ✅ Arquitetura
+---
 
-- A aplicação é executada **totalmente em containers Docker**.
-- O Laravel é executado em um container próprio (`laravel-app`).
-- O banco de dados MySQL roda em um container separado (`mysql`).
+## 🧱 Arquitetura com Docker
+
+Este projeto roda **completamente dentro de containers Docker**:
+
+- **Laravel** (API PHP) roda no container `laravel-app`
+- **MySQL** roda no container `mysql`
+- Ambos os serviços compartilham a mesma rede Docker
 
 ---
 
@@ -49,7 +53,7 @@ cd seurepositorio
 # 2. Copie o arquivo .env
 cp .env.example .env
 
-# 3. Suba os containers da aplicação e do banco
+# 3. Suba os containers Laravel e MySQL
 docker-compose up --build -d
 
 # 4. Instale as dependências do Laravel dentro do container
@@ -58,8 +62,8 @@ docker exec -it laravel-app composer install
 # 5. Gere a chave da aplicação
 docker exec -it laravel-app php artisan key:generate
 
-# 6. Configure o .env (se necessário)
-# Exemplo de variáveis de conexão com o banco:
+# 6. Configure o .env se necessário:
+# Variáveis de conexão com o banco dentro do Docker:
 DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_PORT=3306
