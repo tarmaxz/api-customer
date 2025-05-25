@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Repositories\CustomerRepository;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\CustomerRequest;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\BusinessException;
-
 
 class CustomerController extends Controller {
 
