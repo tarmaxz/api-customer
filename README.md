@@ -1,58 +1,71 @@
-# **API de Cadastro de Clientes com Validação de CEP**
+# API de Cadastro de Clientes com Validação de CEP
 
-## **Descrição do Projeto**
+## 📌 Descrição do Projeto
 
-**Backend (API Laravel)** com listagem, cadastro, edição e exclusão de cliente.
+**Backend (API em Laravel)** para cadastro de clientes, com funcionalidades de listagem, criação, edição e exclusão, além de validação automática de endereço via **CEP**.
 
-## Requisitos
-- PHP 7.3 ou superior até a versão 8.x
-- Laravel 8.75 ou superior
-- Docker (v20.10+)
-- Docker Compose (v1.29+ ou V2)
-⚠️ **Observação:** Neste projeto, apenas o **MySQL roda dentro de um container Docker**. A aplicação Laravel roda localmente na sua máquina.
+## ✅ Arquitetura
 
+- A aplicação é executada **totalmente em containers Docker**.
+- O Laravel é executado em um container próprio (`laravel-app`).
+- O banco de dados MySQL roda em um container separado (`mysql`).
 
-## Tecnologias Utilizadas
-- PHP ^7.3 ou ^8.0
-- Laravel 8.x
-- MySQL 8.x
-- BrasilAPI para validação de endereço
-- LaravelLegends para validação de CPF (pt-br)
+---
 
-## Rotas
-- `GET    /api/customers` – Listar clientes
-- `POST   /api/customers` – Criar cliente
-- `GET    /api/customers/{id}` – Buscar cliente específico
-- `PUT    /api/customers/{id}` – Atualizar cliente
+## 🚀 Tecnologias Utilizadas
+
+- PHP ^7.3 ou ^8.0  
+- Laravel 8.x  
+- MySQL 8.x  
+- [BrasilAPI](https://brasilapi.com.br) – validação de endereço via CEP  
+- [LaravelLegends/pt-br-validator](https://github.com/LaravelLegends/pt-br-validator) – validação de CPF
+
+---
+
+## 📡 Rotas da API
+
+- `GET    /api/customers` – Listar clientes  
+- `POST   /api/customers` – Criar cliente  
+- `GET    /api/customers/{id}` – Buscar cliente específico  
+- `PUT    /api/customers/{id}` – Atualizar cliente  
 - `DELETE /api/customers/{id}` – Deletar cliente (soft delete)
 
 ---
-## Instalação
+
+## 🛠️ Requisitos
+
+- Docker 20.10+  
+- Docker Compose v1.29+ ou Docker Compose V2  
+
+---
+
+## ⚙️ Instalação
 
 ```bash
 # 1. Clone o repositório
+git clone https://github.com/seuusuario/seurepositorio.git
+cd seurepositorio
 
 # 2. Copie o arquivo .env
+cp .env.example .env
 
-# 3. Suba o banco de dados MySQL em container
-docker-compose up -d
+# 3. Suba os containers da aplicação e do banco
+docker-compose up --build -d
 
-# 4. Instale as dependências do PHP
-composer install
+# 4. Instale as dependências do Laravel dentro do container
+docker exec -it laravel-app composer install
 
 # 5. Gere a chave da aplicação
-php artisan key:generate
+docker exec -it laravel-app php artisan key:generate
 
-# 6. Dados para conexão do banco:
+# 6. Configure o .env (se necessário)
+# Exemplo de variáveis de conexão com o banco:
 DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3406
+DB_HOST=mysql
+DB_PORT=3306
 DB_DATABASE=api_customer
 DB_USERNAME=admin
 DB_PASSWORD=admin
 
 # 7. Rode as migrations e seeders
-php artisan migrate --seed
-
-# 8. Inicie o servidor Laravel
-php artisan serve
+docker exec -it laravel-app php artisan migrate --seed
